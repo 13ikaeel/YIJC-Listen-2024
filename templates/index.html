@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+	<title>W3.CSS Template</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="../static/styles.css">
+	<link rel="icon" type="image/png" href="../static/Images/logo.png">
+
+	<!--Main font(lora)-->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+	
+	<!--Secondary font()-->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+	
+	<!--Icons from boxicons-->
+	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+
+<!--********************************************************************************************************************************************************************************************************-->
+<!--********************************************************************************************************************************************************************************************************-->
+<!--********************************************************************************************************************************************************************************************************-->
+<!--********************************************************************************************************************************************************************************************************-->
+
+
+<body>
+
+	<!-- Sidebar with image -->
+	<nav class="poster w3-sidebar w3-hide-medium w3-hide-small" style="width:40%">
+		<div class="poster-img"></div>
+	</nav>
+	
+	<!-- Hidden Sidebar (reveals when clicked on menu icon)-->
+	<nav class="w3-sidebar w3-black w3-animate-right w3-xxlarge" style="display:none;padding-top:150px;right:0;z-index:2" id="mySidebar">
+		<a href="javascript:void(0)" onclick="closeNav()" class="w3-button w3-black w3-xxxlarge w3-display-topright" style="padding:0 12px;">
+			<i class="fa fa-remove"></i>
+		</a>
+		<div class="w3-bar-block w3-center">
+			<a href="{{url_for('resend_ticket')}}" class="w3-bar-item w3-button w3-text-grey " onclick="closeNav()"><span class="nav-words">Resend Ticket</span></a>
+			<a href="{{url_for('contact')}}" class="w3-bar-item w3-button w3-text-grey " onclick="closeNav()"><span class="nav-words">Contact Us</span></a>
+		</div>
+	</nav>
+
+	<!-- Page Content -->
+	<div class="w3-main w3-padding-large" style="margin-left:40%">
+
+		<!-- Menu icon to open sidebar -->
+		<span class="w3-button w3-top w3-xxlarge  w3-hover-text-black" style="width:auto;right:0;" onclick="openNav()"><i class="fa fa-bars"></i></span>
+
+		<!-- Header -->
+		<header class="w3-container w3-center" style="padding:80px 16px 40px 16px" id="home">
+			<h1 class="title">YIJC Listen 2024</h1>
+			<img src='../static/Images/mc20.png' class="w3-image w3-hide-large w3-hide-small w3-round" style="display:block;width:60%;margin:auto;">
+			<img src='../static/Images/mc20.png' class="w3-image w3-hide-large w3-hide-medium w3-round" width="1000" height="1333">
+			<div id = "main">
+				<form action="{{url_for('validate')}}" method="POST">
+					<input id="emailbox" name="email" autocomplete="email"  type="email" placeholder=" Enter Your Icons Email" required>
+					<div id = "buttonContainer">
+						<button id="emailbutton">Get Started </button>
+					</div>
+				</form>
+			</div>
+			<div class="flashes">
+				{% for message in get_flashed_messages() %}
+					<p>{{message}}</p>
+				{% endfor %}
+			</div>
+			
+		</header>
+		
+		
+		<!-- Important Notes  -->
+		<div class="w3-content w3-justify w3-text-grey w3-padding-32" id="about" s>
+			<h2>Important Notes!!!</h2>
+			<hr class="w3-opacity">
+				<p class="desc">&#x2022 This Website allows only allows current YIJC students to request for a ticket to LISTEN 2024</p>
+				<p class="desc">&#x2022 For YIJC staff, please approach the Musicians' Club teachers</p>
+				<p class="desc">&#x2022 For friends and family members of the musicians, please approach them for tickes.</p>
+				<p class="desc">&#x2022 As this is a semi-restricted event, we regret to inform that we are not making tickets available for alumni or members of public</p>
+		</div>
+
+		
+		<!-- Portfolio Section -->
+		<div class="w3-padding-32 w3-content" id="portfolio">
+			<h2 class="w3-text-grey">Previously On YIJC LISTEN...</h2>
+			<hr class="w3-opacity">
+
+			<!-- Grid for photos -->
+			<div class="w3-row-padding" style="margin:0 -16px">
+				<div class="w3-half">
+					<img src="../static/Images/mc1.jpg" style="width:100%">
+					<img src="../static/Images/mc2.jpg" style="width:100%">
+					<img src="../static/Images/mc3.jpg" style="width:100%">
+					<img src="../static/Images/mc4.jpg" style="width:100%">
+					<img src="../static/Images/mc5.jpg" style="width:100%">
+					<img src="../static/Images/mc6.jpg" style="width:100%">
+					<img src="../static/Images/mc7.jpg" style="width:100%">
+					<img src="../static/Images/mc8.jpg" style="width:100%">
+					<img src="../static/Images/mc9.jpg" style="width:100%">
+				</div>
+
+				<div class="w3-half">
+					<img src="../static/Images/mc10.jpg" style="width:100%">
+					<img src="../static/Images/mc11.jpg" style="width:100%">
+					<img src="../static/Images/mc12.jpg" style="width:100%">
+					<img src="../static/Images/mc13.jpg" style="width:100%">
+					<img src="../static/Images/mc14.jpg" style="width:100%">
+					<img src="../static/Images/mc15.jpg" style="width:100%">
+					<img src="../static/Images/mc16.jpg" style="width:100%">
+					<img src="../static/Images/mc17.jpg" style="width:100%">
+					<img src="../static/Images/mc18.jpg" style="width:100%">
+					<img src="../static/Images/mc19.jpg" style="width:100%">
+				</div>
+			<!-- End photo grid -->
+			</div>
+		<!-- End Portfolio Section -->
+		</div>
+
+		
+		
+
+	<script type = "text/javascript">
+	// Open and close sidebar
+	let counter = 0;
+	var outOfTickets =  {{outOfTickets | tojson}};
+	var failedConnection = {{failedConnection | tojson}};
+	let isPageUnloading = false;
+	const btn = document.getElementById("emailbutton");
+	const container = document.getElementById("buttonContainer");
+	const main = document.querySelector("#main");
+	const input = document.querySelector("#emailbox");
+	btn.style.cursor = "pointer";
+	if (outOfTickets) {
+		main.innerHTML = `<h2>Sorry, we are out of tickets. You can <a href = '{{url_for("contact")}}'>drop us a message<a> to request to be placed on the standby list.<h2>`
+	}
+	if (failedConnection){
+		main.innerHTML = `<h2>If you are seeing this, it means our server lost connection during the process of sending you your ticket. <a href = "{{url_for('resend_ticket')}}">Please ask for a resend.</a><h2>`
+	}
+	const valid = (str)  => {
+		const regex  = /[a-zA-Z]@students\.edu\.sg/;
+		return regex.test(str)
+	}
+	const disable = () => {
+		const email = input.value;
+		if (valid(email)){
+			console.log("valid email")
+			counter += 1;
+			if (counter > 1){
+				btn.style.cursor = "not-allowed";
+   				btn.disabled = true;
+    			btn.innerText = "Submitting...";
+    			btn.style.backgroundColor = "#483d8b";
+			}
+    		btn.style.cursor = "not-allowed";
+    		btn.innerText = "Submitting...";
+    		btn.style.backgroundColor = "#E6E6FA";
+			isPageUnloading = true;
+	}
+}
+	btn.addEventListener('click', disable);	
+
+	window.addEventListener('pageshow', function(event) {
+  		if (event.persisted) {
+			container.innerHTML = `
+			<button id="emailbutton">Get Started </button>`
+  		}
+	});
+	function openNav() {
+		document.getElementById("mySidebar").style.width = "100%";
+		document.getElementById("mySidebar").style.display = "block";
+	}
+
+	function closeNav() {
+		document.getElementById("mySidebar").style.display = "none";
+	}
+	</script>
+
+</body>
+</html>

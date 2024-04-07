@@ -1,0 +1,1 @@
+Please extract the QRcode.zip file before running server.py
