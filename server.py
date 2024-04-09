@@ -134,6 +134,14 @@ def success():
     message = request.form.get('message')
     pin = request.form.get('pin')
     details = [email,member, message]
+    db = connect("Ticketing.db")
+    c = db.cursor()
+    c.execute('''SELECT * from Bookings WHERE Email = ?''', (email,))
+    duplicate = c.fetchone()
+    db.close()
+    if duplicate:
+        flash("Invalid: Email already used")
+        return redirect(url_for('index'))
     if message and not member:
         flash("Please indicate a member to send a shoutout")
         return render_template('confirmation.html', email = email, message = message, pin=pin, members = members, error = '*Please indicate a member to send a shoutout')
@@ -171,7 +179,7 @@ def success():
 
             ''', attachments = [f"/home/yimc/YIJC-Listen-2024/static/QRcodes/ticket_{ticket_num(ticket_no[0])}.png"])
             return render_template('success.html')
-	except Exception as error:	
+        except Exception as error:	
             print(f"error message: {error}")
             return render_template("index.html", failedConnection=True, outOfTickets=False)
 
@@ -215,10 +223,9 @@ def resend_ticket_success():
                     5. As part of security and adherence to college rules, all bags will be checked before entering the venue.
 
                 ''', attachments = [f"/home/yimc/YIJC-Listen-2024/static/QRcodes/ticket_{ticket_num(TicketNo[0])}.png"])
-
-                return render_template("resend_ticket_success.html")
-	    except Exception as error:
-		print(f"error message: {error}")    
+		return render_template("resend_ticket_success.html")
+            except Exception as error:
+	        print(f"error message: {error}")    
                 return render_template("index.html", failedConnection=True, outOfTickets=False)
         else:
             flash("Email is Not Found...Sign Up")
