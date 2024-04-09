@@ -105,7 +105,7 @@
 		main.innerHTML = `<h2>Sorry, we are out of tickets. You can <a href = '{{url_for("contact")}}'>drop us a message<a> to request to be placed on the standby list.<h2>`
 	}
 	if (failedConnection){
-		main.innerHTML = `<h2>If you are seeing this, it means our server lost connection during the process of sending you your ticket. <a href = "{{url_for('resend_ticket')}}">Please ask for a resend.</a><h2>`
+		main.innerHTML = `<h2>If you are seeing this, it means our server lost connection during the process of sending you your ticket. <a href = "{{url_for('resend_ticket')}}">Please ask for a resend.</a> You can come back later to try if the website appears to be slowing down.<h2>`
 	}
 	const valid = (str)  => {
 		const regex  = /[a-zA-Z]@students\.edu\.sg/;
