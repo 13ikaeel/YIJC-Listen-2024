@@ -169,9 +169,10 @@ def success():
                     4. MC may postpone, cancel or interrupt the event due to dangerous situations or any cause beyond reasonable control.
                     5. As part of security and adherence to college rules, all bags will be checked before entering the venue.
 
-            ''', attachments = [f"static/QRcodes/ticket_{ticket_num(ticket_no[0])}.png"])
+            ''', attachments = [f"/home/yimc/YIJC-Listen-2024/static/QRcodes/ticket_{ticket_num(ticket_no[0])}.png"])
             return render_template('success.html')
-        except:
+	except Exception as error:	
+            print(f"error message: {error}")
             return render_template("index.html", failedConnection=True, outOfTickets=False)
 
 #----------------------------------------------------------------------------------------------------------------------
@@ -213,10 +214,11 @@ def resend_ticket_success():
                     4. MC may postpone, cancel or interrupt the event due to dangerous situations or any cause beyond reasonable control.
                     5. As part of security and adherence to college rules, all bags will be checked before entering the venue.
 
-                ''', attachments = [f"static/QRcodes/ticket_{ticket_num(TicketNo[0])}.png"])
+                ''', attachments = [f"/home/yimc/YIJC-Listen-2024/static/QRcodes/ticket_{ticket_num(ticket_no[0])}.png"])
 
                 return render_template("resend_ticket_success.html")
-            except:
+	    except Exception as error:
+		print(f"error message: {error}")    
                 return render_template("index.html", failedConnection=True, outOfTickets=False)
         else:
             flash("Email is Not Found...Sign Up")
