@@ -231,9 +231,9 @@ def resend_ticket_success():
                     5. As part of security and adherence to college rules, all bags will be checked before entering the venue.
 
                 ''', attachments = [f"/home/yimc/YIJC-Listen-2024/static/QRcodes/ticket_{ticket_num(TicketNo[0])}.png"])
-		return render_template("resend_ticket_success.html")
+                return render_template("resend_ticket_success.html")
             except Exception as error:
-	        print(f"error message: {error}")    
+                print(f"error message: {error}")    
                 return render_template("index.html", failedConnection=True, outOfTickets=False)
         else:
             flash("Email is Not Found...Sign Up")
