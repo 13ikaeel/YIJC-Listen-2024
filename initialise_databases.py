@@ -14,7 +14,8 @@ def calc_sha256_salted(data):
 
 
 def initialise(db_no):
-    db = connect(f'/home/yimc/YIJC-LISTEN-2024/Ticketing{no}.db')
+    #db = connect(f"Ticketing{db_no}.db") uncomment when offline
+    db = connect(f'/home/yimc/YIJC-LISTEN-2024/Ticketing{db_no}.db') #comment off when offline
     c = db.cursor()
 
 ##########################################################################
