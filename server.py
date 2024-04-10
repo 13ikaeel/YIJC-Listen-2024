@@ -33,7 +33,8 @@ def ticket_num(ticket_no):
     # img.save(f"static/QRcodes/ticket_{ticket_no[0]}.png")
 
 #add all 'MC members' to members
-file = open('MC Members.txt')
+# file = open('MC Members.txt') #uncomment for offline testing
+file = open('/home/yimc/YIJC-Listen-2024/MC Members.txt') #comment out for offline testing
 members = []
 for member in file:
     members.append(member.strip())
@@ -51,7 +52,8 @@ app.secret_key = 'mcyi'
 #----------------------------------------------------------------------------------------------------------------------
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    db = connect('Ticketing.db')
+    # db = connect('Ticketing.db') #uncomment for offline testing
+    db = connect('/home/yimc/YIJC-Listen-2024/Ticketing.db') #comment out for offline testing
     c = db.cursor()
     c.execute('''SELECT * FROM Tickets WHERE Reserved = 0''')
     outOfTickets = c.fetchone() is None
@@ -65,7 +67,8 @@ def validate():
     email = request.form.get('email')
     email = email.lower()
 
-    db = connect('Ticketing.db')
+    # db = connect('Ticketing.db') #uncomment for offline testing
+    db = connect('/home/yimc/YIJC-Listen-2024/Ticketing.db') #comment out for offline testing
     c = db.cursor()
     c.execute('''SELECT * FROM AllStudentsEmail
                 WHERE HashedEmail = ?''', (calc_sha256_salted(email),))
@@ -84,7 +87,8 @@ def validate():
             return redirect(url_for('index'))
         else:
             pin =  random.randint(100000, 999999)
-            db = connect('Ticketing.db')
+            # db = connect('Ticketing.db') #uncomment for offline testing
+            db = connect('/home/yimc/YIJC-Listen-2024/Ticketing.db') #comment out for offline testing
             c = db.cursor()
             print(pin,calc_sha256_salted(email))
             c.execute('''UPDATE AllStudentsEmail SET PIN = ? WHERE HashedEmail = ?''', (pin, calc_sha256_salted(email)))
@@ -110,7 +114,8 @@ def confirmation():
     print(calc_sha256_salted(email))
     pin = request.form.get('pin')
 
-    db = connect('Ticketing.db')
+    # db = connect('Ticketing.db') #uncomment for offline testing
+    db = connect('/home/yimc/YIJC-Listen-2024/Ticketing.db') #comment out for offline testing
     c = db.cursor()
     c.execute('''SELECT PIN FROM AllStudentsEmail WHERE HashedEmail = ?''', (calc_sha256_salted(email),))
 
@@ -134,7 +139,8 @@ def success():
     message = request.form.get('message')
     pin = request.form.get('pin')
     details = [email,member, message]
-    db = connect("Ticketing.db")
+    # db = connect("Ticketing.db") #uncomment for offline testing
+    db = connect('/home/yimc/YIJC-Listen-2024/Ticketing.db') #comment out for offline testing
     c = db.cursor()
     c.execute('''SELECT * from Bookings WHERE Email = ?''', (email,))
     duplicate = c.fetchone()
@@ -146,7 +152,8 @@ def success():
         flash("Please indicate a member to send a shoutout")
         return render_template('confirmation.html', email = email, message = message, pin=pin, members = members, error = '*Please indicate a member to send a shoutout')
     else:
-        db = connect('Ticketing.db')
+        # db = connect('Ticketing.db') #uncomment for offline testing
+        db = connect('/home/yimc/YIJC-Listen-2024/Ticketing.db') #comment out for offline testing
         c = db.cursor()
         c.execute('''SELECT TicketNo FROM Tickets WHERE Reserved = 0''')
         available = c.fetchone()[0]
@@ -193,7 +200,8 @@ def resend_ticket():
 def resend_ticket_success():
     email = request.form.get('email')
     pin = request.form.get('pin')
-    db = connect('Ticketing.db')
+    # db = connect('Ticketing.db') #uncomment for offline testing
+    db = connect('/home/yimc/YIJC-Listen-2024/Ticketing.db') #comment out for offline testing
     c = db.cursor()
     hashed_email = str(calc_sha256_salted(email))
     c.execute('''SELECT * FROM AllStudentsEmail
