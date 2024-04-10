@@ -13,8 +13,8 @@ def calc_sha256_salted(data):
 
 
 
-def initialise(db_clone):
-    db = connect(f'Ticketing{db_clone}.db')
+def initialise(db_no):
+    db = connect(f'/home/yimc/YIJC-LISTEN-2024/Ticketing{no}.db')
     c = db.cursor()
 
 ##########################################################################
