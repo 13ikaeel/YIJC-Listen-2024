@@ -277,21 +277,25 @@ def success():
                 To = f'{email}',
                 Subject = 'LISTEN 2024 Concert Ticket',
                 HtmlBody = '''
-
-                Date: 26 April 2024 Friday<br>
-                Time: 7pm<br>
-                Venue: YIJC Hall<br>
-            
-                If you wish to, you can still collect a hard copy ticket from us at our collection booth, or simply use this QR code for admission on show day.<br>
-            
-                Terms and Conditions:<br>
-                    1. Damaged QR codes and wristbands will not be accepted for admission or readmission.<br>
-                    2. This event is free standing.<br>
-                    3. MC reserves the right to refuse the admission or evict any person whose conduct is disorderly or inappropriate or poses a security threat.<br>
-                    4. MC may postpone, cancel or interrupt the event due to dangerous situations or any cause beyond reasonable control.<br>
-                    5. As part of security and adherence to college rules, all bags will be checked before entering the venue.<br>
-
-            '''
+                    <p>
+                    Date: 26 April 2024 Friday<br>
+                    Time: 7pm<br>
+                    Venue: YIJC Hall<br>
+                    </p>
+                    <p>
+                    If you wish to, you can still collect a hard copy ticket from us at our collection booth, or simply use this QR code for admission on show day.<br>
+                    </p>
+                    <p>
+                    Terms and Conditions:
+                    <ol>
+                        <li>Damaged QR codes and wristbands will not be accepted for admission or readmission.</li>
+                        <li>This event is free standing.</li>
+                        <li>MC reserves the right to refuse the admission or evict any person whose conduct is disorderly or inappropriate or poses a security threat.</li>
+                        <li>MC may postpone, cancel or interrupt the event due to dangerous situations or any cause beyond reasonable control.</li>
+                        <li>As part of security and adherence to college rules, all bags will be checked before entering the venue.</li>
+                    </ol>
+                    </p>
+             '''
             )
             email.attach(f'/home/yimc/YIJC-Listen-2024/static/QRcodes/ticket_{ticket_num(ticket_no[0])}.png') #uncomment when offline
             # email.attach(f'static/QRcodes/ticket_{ticket_num(ticket_no[0])}.png') 
@@ -349,20 +353,24 @@ def resend_ticket_success():
                     To = f'{email}',
                     Subject = 'LISTEN 2024 Concert Ticket',
                     HtmlBody = '''
-
+                    <p>
                     Date: 26 April 2024 Friday<br>
                     Time: 7pm<br>
                     Venue: YIJC Hall<br>
-            
+                    </p>
+                    <p>
                     If you wish to, you can still collect a hard copy ticket from us at our collection booth, or simply use this QR code for admission on show day.<br>
-            
-                    Terms and Conditions:<br>
-                        1. Damaged QR codes and wristbands will not be accepted for admission or readmission.<br>
-                        2. This event is free standing.<br>
-                        3. MC reserves the right to refuse the admission or evict any person whose conduct is disorderly or inappropriate or poses a security threat.<br>
-                        4. MC may postpone, cancel or interrupt the event due to dangerous situations or any cause beyond reasonable control.<br>
-                        5. As part of security and adherence to college rules, all bags will be checked before entering the venue.<br>
-
+                    </p>
+                    <p>
+                    Terms and Conditions:
+                    <ol>
+                        <li>Damaged QR codes and wristbands will not be accepted for admission or readmission.</li>
+                        <li>This event is free standing.</li>
+                        <li>MC reserves the right to refuse the admission or evict any person whose conduct is disorderly or inappropriate or poses a security threat.</li>
+                        <li>MC may postpone, cancel or interrupt the event due to dangerous situations or any cause beyond reasonable control.</li>
+                        <li>As part of security and adherence to college rules, all bags will be checked before entering the venue.</li>
+                    </ol>
+                    </p>
              '''
                 )
                 email.attach(f'/home/yimc/YIJC-Listen-2024/static/QRcodes/ticket_{ticket_num(TicketNo[0])}.png') #uncomment when offline
