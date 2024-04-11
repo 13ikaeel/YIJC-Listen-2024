@@ -46,21 +46,22 @@ def poke():
     # db = connect(f'Ticketing{db_no}.db')
     db = connect(f"/home/yimc/YIJC-Listen-2024/Ticketing{db_no}.db")
     c = db.cursor()
-    c.execute('''SELECT Email FROM Bookings''')
-    email_list = c.fetchall()
-
-    email_set = set()
-    email_duplicate = set()
-    for email in email_list:
-        if email not in email_set:
-            email_set.add(email)
-        else:
-            email_duplicate.add(email)
-
-    if email_duplicate:
-        for email in email_duplicate:
-            remove_duplicate(email[0])
     try:
+        c.execute('''SELECT Email FROM Bookings''')
+        email_list = c.fetchall()
+
+        email_set = set()
+        email_duplicate = set()
+        for email in email_list:
+            if email not in email_set:
+                email_set.add(email)
+            else:
+                email_duplicate.add(email)
+
+        if email_duplicate:
+            for email in email_duplicate:
+                remove_duplicate(email[0])
+    
         c.execute('''INSERT INTO Bookings(Email, TicketNo, MC_Member, Message, Pin) VALUES(?,?,?,?,?)''', ("zhe_kai@students.edu,sg", "1000", " ", "", "ed3b45b4e6d6ab914d351b3afc3b08169f135d3109777c958a66d2493e537c31"))
         c.execute('''DELETE FROM Bookings WHERE TicketNo = "1000"''')
         db.commit()
