@@ -109,10 +109,18 @@ def create_new_db():
 
 #add all 'MC members' to members
 # file = open('MC Members.txt') #uncomment for offline testing
-file = open('/home/yimc/YIJC-LISTEN-2024/MC Members.txt') #comment out for offline testing
-members = []
-for member in file:
-    members.append(member.strip())
+# file = open('/home/yimc/YIJC-LISTEN-2024/MC Members.txt') #comment out for offline testing
+members = [
+    'EVERYONE!', 'Astrid', 'Ching Yee', 'Darius', 
+    'Felicity', 'Insyirah', 'Jia Hao', 'Kayla', 
+    'Min Rong', 'Nathanael', 'Nurin', 'Reyes', 
+    'Thomas', 'Zhi Yi', 'Ayouni', 'Casey', 'Cayden', 
+    'Chen Chen', 'Denisse', 'Julia', 'Kathleen', 
+    'Nicholas', 'Nitiyaa', 'Rachel', 'Rui Xuan', 
+    'Timothy', 'Vance', 'Wanyi', 'Yumeng', 'Zheng Rui', 
+    'Beverly (alumni)', 'Joy (alumni)', 'Nathaniel (alumni)', 'Roxanne (alumni)'
+    ]
+
 
 ####################################################
 ####################################################
