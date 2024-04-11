@@ -4,7 +4,7 @@ from hashlib import *
 from time import *
 
 def calc_sha256_salted(data):
-    data = 'LISTEN' + str(data) + '2024'
+    data = 'LISTEN 2024' + str(data) + 'KJK_SWP'
     if isinstance(data,str):
         data = data.encode()
     return sha256(data).hexdigest()
@@ -24,7 +24,7 @@ def generate_qr(ticket_no):
     position = ((img.width - text_width) // 2, img.height - text_height - 10)
     draw.text(position, text, fill='black', font=font)
 
-    img.save(f"static/Qrcodes/ticket_{ticket_no}.png")
+    img.save(f"static/Qrcodes_final/ticket_{ticket_no}.png")
     print(f'ticket_{ticket_no}.png created')
 
 for i in range(1, 901):
