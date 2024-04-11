@@ -46,21 +46,22 @@ def poke():
     # db = connect(f'Ticketing{db_no}.db')
     db = connect(f"/home/yimc/YIJC-Listen-2024/Ticketing{db_no}.db")
     c = db.cursor()
-    c.execute('''SELECT Email FROM Bookings''')
-    email_list = c.fetchall()
-
-    email_set = set()
-    email_duplicate = set()
-    for email in email_list:
-        if email not in email_set:
-            email_set.add(email)
-        else:
-            email_duplicate.add(email)
-
-    if email_duplicate:
-        for email in email_duplicate:
-            remove_duplicate(email[0])
     try:
+        c.execute('''SELECT Email FROM Bookings''')
+        email_list = c.fetchall()
+
+        email_set = set()
+        email_duplicate = set()
+        for email in email_list:
+            if email not in email_set:
+                email_set.add(email)
+            else:
+                email_duplicate.add(email)
+
+        if email_duplicate:
+            for email in email_duplicate:
+                remove_duplicate(email[0])
+    
         c.execute('''INSERT INTO Bookings(Email, TicketNo, MC_Member, Message, Pin) VALUES(?,?,?,?,?)''', ("zhe_kai@students.edu,sg", "1000", " ", "", "ed3b45b4e6d6ab914d351b3afc3b08169f135d3109777c958a66d2493e537c31"))
         c.execute('''DELETE FROM Bookings WHERE TicketNo = "1000"''')
         db.commit()
@@ -192,7 +193,7 @@ def validate():
                 From = 'listen@yimusicians.org',
                 To = f'{email}',
                 Subject = 'PIN for LISTEN 2024 Ticket',
-                HtmlBody = f'Here is your pin: {pin}'
+                HtmlBody = f'Here is your pin: <br><br>{pin}'
             )
             # yag.send(f"{email}", "LISTEN 2024 concert", f"Here is your pin {pin}")
             return render_template("validating.html", details=[email, '', ''],email=email, members=members)
@@ -276,21 +277,25 @@ def success():
                 To = f'{email}',
                 Subject = 'LISTEN 2024 Concert Ticket',
                 HtmlBody = '''
-
-                Date: 26 April 2024 Friday\n
-                Time: 7pm\n
-                Venue: YIJC Hall\n
-            
-                If you wish to, you can still collect a hard copy ticket from us at our collection booth, or simply use this QR code for admission on show day.\n
-            
-                Terms and Conditions:\n
-                    1. Damaged QR codes and wristbands will not be accepted for admission or readmission.\n
-                    2. This event is free standing.\n
-                    3. MC reserves the right to refuse the admission or evict any person whose conduct is disorderly or inappropriate or poses a security threat.\n
-                    4. MC may postpone, cancel or interrupt the event due to dangerous situations or any cause beyond reasonable control.\n
-                    5. As part of security and adherence to college rules, all bags will be checked before entering the venue.\n
-
-            '''
+                    <p>
+                    Date: 26 April 2024 Friday<br>
+                    Time: 7pm<br>
+                    Venue: YIJC Hall<br>
+                    </p>
+                    <p>
+                    If you wish to, you can still collect a hard copy ticket from us at our collection booth, or simply use this QR code for admission on show day.<br>
+                    </p>
+                    <p>
+                    Terms and Conditions:
+                    <ol>
+                        <li>Damaged QR codes and wristbands will not be accepted for admission or readmission.</li>
+                        <li>This event is free standing.</li>
+                        <li>MC reserves the right to refuse the admission or evict any person whose conduct is disorderly or inappropriate or poses a security threat.</li>
+                        <li>MC may postpone, cancel or interrupt the event due to dangerous situations or any cause beyond reasonable control.</li>
+                        <li>As part of security and adherence to college rules, all bags will be checked before entering the venue.</li>
+                    </ol>
+                    </p>
+             '''
             )
             email.attach(f'/home/yimc/YIJC-Listen-2024/static/QRcodes/ticket_{ticket_num(ticket_no[0])}.png') #uncomment when offline
             # email.attach(f'static/QRcodes/ticket_{ticket_num(ticket_no[0])}.png') 
@@ -348,20 +353,24 @@ def resend_ticket_success():
                     To = f'{email}',
                     Subject = 'LISTEN 2024 Concert Ticket',
                     HtmlBody = '''
-
-                    Date: 26 April 2024 Friday\n
-                    Time: 7pm\n
-                    Venue: YIJC Hall\n
-            
-                    If you wish to, you can still collect a hard copy ticket from us at our collection booth, or simply use this QR code for admission on show day.\n
-            
-                    Terms and Conditions:\n
-                        1. Damaged QR codes and wristbands will not be accepted for admission or readmission.\n
-                        2. This event is free standing.\n
-                        3. MC reserves the right to refuse the admission or evict any person whose conduct is disorderly or inappropriate or poses a security threat.\n
-                        4. MC may postpone, cancel or interrupt the event due to dangerous situations or any cause beyond reasonable control.\n
-                        5. As part of security and adherence to college rules, all bags will be checked before entering the venue.\n
-
+                    <p>
+                    Date: 26 April 2024 Friday<br>
+                    Time: 7pm<br>
+                    Venue: YIJC Hall<br>
+                    </p>
+                    <p>
+                    If you wish to, you can still collect a hard copy ticket from us at our collection booth, or simply use this QR code for admission on show day.<br>
+                    </p>
+                    <p>
+                    Terms and Conditions:
+                    <ol>
+                        <li>Damaged QR codes and wristbands will not be accepted for admission or readmission.</li>
+                        <li>This event is free standing.</li>
+                        <li>MC reserves the right to refuse the admission or evict any person whose conduct is disorderly or inappropriate or poses a security threat.</li>
+                        <li>MC may postpone, cancel or interrupt the event due to dangerous situations or any cause beyond reasonable control.</li>
+                        <li>As part of security and adherence to college rules, all bags will be checked before entering the venue.</li>
+                    </ol>
+                    </p>
              '''
                 )
                 email.attach(f'/home/yimc/YIJC-Listen-2024/static/QRcodes/ticket_{ticket_num(TicketNo[0])}.png') #uncomment when offline
