@@ -4,7 +4,9 @@ from flask import*
 from sqlite3 import*
 from hashlib import *
 import random
-import yagmail
+# import yagmail
+from postmarker.core import PostmarkClient
+postmark = PostmarkClient(server_token = '914d85ea-85fd-4024-9cc9-547d990b6643')
 import qrcode
 from PIL import Image
 #hash data
@@ -95,8 +97,14 @@ def validate():
             db.commit()
             db.close()
         
-            yag = yagmail.SMTP("yimusiciansclub@gmail.com", "sebi eyvp igyl vqfa")  
-            yag.send(f"{email}", "LISTEN 2024 concert", f"Here is your pin {pin}")
+            yag = yagmail.SMTP("yimusiciansclub@gmail.com", "sebi eyvp igyl vqfa")
+            postmark.emails.send(
+                From = 'listen@yimusicians.org',
+                To = f'{email}',
+                Subject = 'PIN for LISTEN 2024 Ticket',
+                HtmlBody = f'Here is your pin: {pin}'
+            )
+            # yag.send(f"{email}", "LISTEN 2024 concert", f"Here is your pin {pin}")
             return render_template("validating.html", details=[email, '', ''],email=email, members=members)
     else:
         print('hi')
@@ -168,8 +176,12 @@ def success():
 
         # generate_qr(ticket_no)
         try:
-            yag = yagmail.SMTP("yimusiciansclub@gmail.com", "sebi eyvp igyl vqfa")
-            yag.send(f"{email}", "LISTEN 2024 concert ticket", '''
+            # yag = yagmail.SMTP("yimusiciansclub@gmail.com", "sebi eyvp igyl vqfa")
+            postmark.emails.send(
+                From = 'listen@yimusicians.org',
+                To = f'{email}',
+                Subject = 'LISTEN 2024 Concert Ticket',
+                HtmlBody = '''
 
                 Date: 26 April 2024 Friday
                 Time: 7pm
@@ -184,7 +196,24 @@ def success():
                     4. MC may postpone, cancel or interrupt the event due to dangerous situations or any cause beyond reasonable control.
                     5. As part of security and adherence to college rules, all bags will be checked before entering the venue.
 
-            ''', attachments = [f"/home/yimc/YIJC-Listen-2024/static/QRcodes/ticket_{ticket_num(ticket_no[0])}.png"])
+            '''
+            )
+            # yag.send(f"{email}", "LISTEN 2024 concert ticket", '''
+
+            #     Date: 26 April 2024 Friday
+            #     Time: 7pm
+            #     Venue: YIJC Hall
+            
+            #     If you wish to, you can still collect a hard copy ticket from us at our collection booth, or simply use this QR code for admission on show day.
+            
+            #     Terms and Conditions:
+            #         1. Damaged QR codes and wristbands will not be accepted for admission or readmission.
+            #         2. This event is free standing.
+            #         3. MC reserves the right to refuse the admission or evict any person whose conduct is disorderly or inappropriate or poses a security threat.
+            #         4. MC may postpone, cancel or interrupt the event due to dangerous situations or any cause beyond reasonable control.
+            #         5. As part of security and adherence to college rules, all bags will be checked before entering the venue.
+
+            # ''', attachments = [f"/home/yimc/YIJC-Listen-2024/static/QRcodes/ticket_{ticket_num(ticket_no[0])}.png"])
             return render_template('success.html')
         except Exception as error:	
             print(f"error message: {error}")
