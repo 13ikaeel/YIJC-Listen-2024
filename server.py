@@ -109,7 +109,7 @@ def create_new_db():
 
 #add all 'MC members' to members
 # file = open('MC Members.txt') #uncomment for offline testing
-file = open('MC Members.txt') #comment out for offline testing
+file = open('/home/yimc/YIJC-LISTEN-2024/MC Members.txt') #comment out for offline testing
 members = []
 for member in file:
     members.append(member.strip())
@@ -175,7 +175,7 @@ def validate():
             db.commit()
             db.close()
         
-            yag = yagmail.SMTP("yimusiciansclub@gmail.com", "sebi eyvp igyl vqfa")
+            # yag = yagmail.SMTP("yimusiciansclub@gmail.com", "sebi eyvp igyl vqfa")
             postmark.emails.send(
                 From = 'listen@yimusicians.org',
                 To = f'{email}',
