@@ -3,7 +3,7 @@ from sqlite3 import *
 import hashlib
 
 def calc_sha256_salted(data):
-    data = 'LISTEN' + data + '2024'
+    data = 'LISTEN 2024' + str(data) + 'KJK_SWP'
 
     if isinstance(data,str):
         data = data.encode()
