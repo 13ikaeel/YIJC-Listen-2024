@@ -418,7 +418,7 @@ def contact_success():
     topic = request.form.get("request")
     postmark.emails.send(
         From = 'listen@yimusicians.org',
-        To  = 'kuang_jingkai@moe.edu.sg',
+        To  = 'enquiries@yimusicians.org',
         Subject = f'{topic}',
         HtmlBody = f'{text}\n\n from: {name}, {email}'
     )
