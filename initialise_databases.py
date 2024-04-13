@@ -15,7 +15,7 @@ def calc_sha256_salted(data):
 
 def initialise(db_no):
     #db = connect(f"Ticketing{db_no}.db") uncomment when offline
-    db = connect(f'/home/yimc/YIJC-LISTEN-2024/Ticketing{db_no}.db') #comment off when offline
+    db = connect(f'Ticketing{db_no}.db') #comment off when offline
     c = db.cursor()
 
 ##########################################################################
@@ -48,7 +48,15 @@ def initialise(db_no):
     )''')
 
     for ticket_no in range(1,901):
-        ticket_hashed = calc_sha256_salted(str(ticket_no))
+        if ticket_no < 10:
+            ticket_hashed = f'00{ticket_no}'
+        elif ticket_no < 100:
+            ticket_hashed = f'0{ticket_no}'
+        else:
+            ticket_hashed = str(ticket_no)
+            
+        ticket_hashed = calc_sha256_salted(ticket_hashed)
+        print(ticket_no, ticket_hashed)
         c.execute('''
             INSERT INTO Tickets (
             TicketNo, Ticket_Hashed, Entry, Reserved)\
