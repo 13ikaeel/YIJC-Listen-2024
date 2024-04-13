@@ -376,23 +376,7 @@ def resend_ticket_success():
                 email.attach(f'/home/yimc/YIJC-Listen-2024/static/QRcodes/ticket_{ticket_num(TicketNo[0])}.png') #uncomment when offline
                 # email.attach(f'static/QRcodes/ticket_{ticket_num(TicketNo[0])}.png') #comment off Online
                 email.send()
-                # yag = yagmail.SMTP("yimusiciansclub@gmail.com", "sebi eyvp igyl vqfa")
-                # yag.send(f"{email}", "LISTEN 2024 concert ticket", '''
-
-                # Date: 26 April 2024 Friday
-                # Time: 7pm
-                # Venue: YIJC Hall
-            
-                # If you wish to, you can still collect a hard copy ticket from us at our collection booth, or simply use this QR code for admission on show day.
-            
-                # Terms and Conditions:
-                #     1. Damaged QR codes and wristbands will not be accepted for admission or readmission.
-                #     2. This event is free standing.
-                #     3. MC reserves the right to refuse the admission or evict any person whose conduct is disorderly or inappropriate or poses a security threat.
-                #     4. MC may postpone, cancel or interrupt the event due to dangerous situations or any cause beyond reasonable control.
-                #     5. As part of security and adherence to college rules, all bags will be checked before entering the venue.
-
-                # ''', attachments = [f"/home/yimc/YIJC-LISTEN-2024/static/QRcodes/ticket_{ticket_num(TicketNo[0])}.png"])
+                
                 return render_template("resend_ticket_success.html")
             except Exception as error:
                 print(f"error message: {error}")    
